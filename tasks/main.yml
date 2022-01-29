@@ -1,0 +1,9 @@
+---
+
+- name: disable initial gnome setup
+  ansible.builtin.lineinfile:
+    path: /etc/gdm3/custom.conf
+    regexp: '^InitialSetupEnable'
+    insertafter: '^[daemon]'
+    line: "InitialSetupEnable=false"
+
