@@ -16,9 +16,10 @@
     mode: 0644
 
 - name: disable initial gnome setup in skel directory
-  ansible.builtin.file:
-    path: /etc/skel/.config/gnome-initial-setup-done
-    state: touch
+  ansible.builtin.copy:
+    dest: /etc/skel/.config/gnome-initial-setup-done
+    content: ""
+    force: no
     owner: root
     group: root
     mode: 0644
