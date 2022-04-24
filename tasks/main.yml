@@ -7,3 +7,19 @@
     insertafter: '^[daemon]'
     line: "InitialSetupEnable=false"
 
+- name: ensure .config in skel directory
+  ansible.builtin.file:
+    path: /etc/skel/.config
+    state: directory
+    owner: root
+    group: root
+    mode: 0644
+
+- name: disable initial gnome setup in skel directory
+  ansible.builtin.file:
+    path: /etc/skel/.config/gnome-initial-setup-done
+    state: touch
+    owner: root
+    group: root
+    mode: 0644
+
