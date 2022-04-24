@@ -13,20 +13,37 @@
     regexp: '^X-GNOME-Autostart-enabled='
     line: "X-GNOME-Autostart-enabled=false"
 
-#- name: ensure .config in skel directory
-#  ansible.builtin.file:
-#    path: /etc/skel/.config
-#    state: directory
-#    owner: root
-#    group: root
-#    mode: 0644
+- name: ensure .config in skel directory
+  ansible.builtin.file:
+    path: /etc/skel/.config
+    state: directory
+    owner: root
+    group: root
+    mode: 0644
 
-#- name: disable initial gnome setup in skel directory
-#  ansible.builtin.copy:
-#    dest: /etc/skel/.config/gnome-initial-setup-done
-#    content: ""
-#    force: no
-#    owner: root
-#    group: root
-#    mode: 0644
+- name: disable initial gnome setup in skel directory
+  ansible.builtin.copy:
+    dest: /etc/skel/.config/gnome-initial-setup-done
+    content: ""
+    force: no
+    owner: root
+    group: root
+    mode: 0644
+
+- name: ensure .cache/ubuntu-report in skel directory
+  ansible.builtin.file:
+    path: /etc/skel/.cache/ubuntu-report
+    state: directory
+    owner: root
+    group: root
+    mode: 0644
+
+- name: disable initial gnome setup in skel directory
+  ansible.builtin.copy:
+    dest: /etc/skel/.cache/ubuntu-report/ubuntu.22.04
+    content: '{"OptOut": true}'
+    force: no
+    owner: root
+    group: root
+    mode: 0644
 
