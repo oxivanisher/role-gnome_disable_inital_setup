@@ -4,7 +4,7 @@
   ansible.builtin.lineinfile:
     path: /etc/gdm3/custom.conf
     regexp: '^InitialSetupEnable'
-    insertafter: '^[daemon]'
+    insertafter: '^\[daemon\]'
     line: "InitialSetupEnable=false"
 
 - name: ensure .config in skel directory
