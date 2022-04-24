@@ -30,6 +30,11 @@
     group: root
     mode: 0644
 
+- name: remove ubuntu-report package
+  ansible.builtin.package:
+    name: ubuntu-report
+    state: absent
+
 - name: ensure .cache/ubuntu-report in skel directory
   ansible.builtin.file:
     path: /etc/skel/.cache/ubuntu-report
@@ -40,7 +45,7 @@
 
 - name: disable initial gnome setup in skel directory
   ansible.builtin.copy:
-    dest: /etc/skel/.cache/ubuntu-report/ubuntu.22.04
+    dest: "/etc/skel/.cache/ubuntu-report/ubuntu.{{ ansible_distribution_version }}"
     content: '{"OptOut": true}'
     force: no
     owner: root
