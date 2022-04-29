@@ -19,7 +19,7 @@
     state: directory
     owner: root
     group: root
-    mode: 0644
+    mode: '0755'
 
 - name: disable initial gnome setup in skel directory
   ansible.builtin.copy:
@@ -28,7 +28,7 @@
     force: no
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
 
 - name: remove ubuntu-report and gnome-initial-setup package
   ansible.builtin.package:
@@ -43,7 +43,7 @@
     state: directory
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
 
 - name: disable gnome report in skel directory
   ansible.builtin.copy:
@@ -52,5 +52,5 @@
     force: no
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
 
