@@ -24,15 +24,17 @@
 - name: disable initial gnome setup in skel directory
   ansible.builtin.copy:
     dest: /etc/skel/.config/gnome-initial-setup-done
-    content: ""
+    content: "yes"
     force: no
     owner: root
     group: root
     mode: 0644
 
-- name: remove ubuntu-report package
+- name: remove ubuntu-report and gnome-initial-setup package
   ansible.builtin.package:
-    name: ubuntu-report
+    name:
+      - ubuntu-report
+      - gnome-initial-setup
     state: absent
 
 - name: ensure .cache/ubuntu-report in skel directory
@@ -43,7 +45,7 @@
     group: root
     mode: 0644
 
-- name: disable initial gnome setup in skel directory
+- name: disable gnome report in skel directory
   ansible.builtin.copy:
     dest: "/etc/skel/.cache/ubuntu-report/ubuntu.{{ ansible_distribution_version }}"
     content: '{"OptOut": true}'
