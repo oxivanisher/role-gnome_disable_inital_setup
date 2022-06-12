@@ -25,7 +25,7 @@
   ansible.builtin.copy:
     dest: /etc/skel/.config/gnome-initial-setup-done
     content: "yes"
-    force: no
+    force: false
     owner: root
     group: root
     mode: '0644'
@@ -49,7 +49,7 @@
   ansible.builtin.copy:
     dest: "/etc/skel/.cache/ubuntu-report/ubuntu.{{ ansible_distribution_version }}"
     content: '{"OptOut": true}'
-    force: no
+    force: false
     owner: root
     group: root
     mode: '0644'
