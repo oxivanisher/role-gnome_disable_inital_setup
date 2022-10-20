@@ -1,6 +1,7 @@
 galaxy_info:
   role_name: gnome_disable_inital_setup
   author: Marc Urben
+  namespace: thunderbluff
   description: Disable initial setup for Gnome
   company: Thunderbluff
 
