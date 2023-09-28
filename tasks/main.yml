@@ -1,55 +1,54 @@
 ---
-
-- name: disable initial gnome setup
+- name: Disable initial gnome setup
   ansible.builtin.lineinfile:
     path: /etc/gdm3/custom.conf
-    regexp: '^InitialSetupEnable'
+    regexp: "^InitialSetupEnable"
     insertafter: '^\[daemon\]'
     line: "InitialSetupEnable=false"
 
-- name: disable initial gnome setup for users
+- name: Disable initial gnome setup for users
   ansible.builtin.lineinfile:
     path: /etc/xdg/autostart/gnome-initial-setup-first-login.desktop
-    regexp: '^X-GNOME-Autostart-enabled='
+    regexp: "^X-GNOME-Autostart-enabled="
     line: "X-GNOME-Autostart-enabled=false"
 
-- name: ensure .config in skel directory
+- name: Ensure .config in skel directory
   ansible.builtin.file:
     path: /etc/skel/.config
     state: directory
     owner: root
     group: root
-    mode: '0755'
+    mode: "0755"
 
-- name: disable initial gnome setup in skel directory
+- name: Disable initial gnome setup in skel directory
   ansible.builtin.copy:
     dest: /etc/skel/.config/gnome-initial-setup-done
     content: "yes"
     force: false
     owner: root
     group: root
-    mode: '0644'
+    mode: "0644"
 
-- name: remove ubuntu-report and gnome-initial-setup package
+- name: Remove ubuntu-report and gnome-initial-setup package
   ansible.builtin.package:
     name:
       - ubuntu-report
       - gnome-initial-setup
     state: absent
 
-- name: ensure .cache/ubuntu-report in skel directory
+- name: Ensure .cache/ubuntu-report in skel directory
   ansible.builtin.file:
     path: /etc/skel/.cache/ubuntu-report
     state: directory
     owner: root
     group: root
-    mode: '0644'
+    mode: "0644"
 
-- name: disable gnome report in skel directory
+- name: Disable gnome report in skel directory
   ansible.builtin.copy:
     dest: "/etc/skel/.cache/ubuntu-report/ubuntu.{{ ansible_distribution_version }}"
     content: '{"OptOut": true}'
     force: false
     owner: root
     group: root
-    mode: '0644'
+    mode: "0644"
