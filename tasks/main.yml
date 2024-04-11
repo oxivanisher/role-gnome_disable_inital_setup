@@ -5,12 +5,16 @@
     regexp: "^InitialSetupEnable"
     insertafter: '^\[daemon\]'
     line: "InitialSetupEnable=false"
+  become: true
+  become_user: root
 
 - name: Disable initial gnome setup for users
   ansible.builtin.lineinfile:
     path: /etc/xdg/autostart/gnome-initial-setup-first-login.desktop
     regexp: "^X-GNOME-Autostart-enabled="
     line: "X-GNOME-Autostart-enabled=false"
+  become: true
+  become_user: root
 
 - name: Ensure .config in skel directory
   ansible.builtin.file:
@@ -19,6 +23,8 @@
     owner: root
     group: root
     mode: "0755"
+  become: true
+  become_user: root
 
 - name: Disable initial gnome setup in skel directory
   ansible.builtin.copy:
@@ -28,6 +34,8 @@
     owner: root
     group: root
     mode: "0644"
+  become: true
+  become_user: root
 
 - name: Remove ubuntu-report and gnome-initial-setup package
   ansible.builtin.package:
@@ -35,6 +43,8 @@
       - ubuntu-report
       - gnome-initial-setup
     state: absent
+  become: true
+  become_user: root
 
 - name: Ensure .cache/ubuntu-report in skel directory
   ansible.builtin.file:
@@ -43,6 +53,8 @@
     owner: root
     group: root
     mode: "0644"
+  become: true
+  become_user: root
 
 - name: Disable gnome report in skel directory
   ansible.builtin.copy:
@@ -52,3 +64,5 @@
     owner: root
     group: root
     mode: "0644"
+  become: true
+  become_user: root
