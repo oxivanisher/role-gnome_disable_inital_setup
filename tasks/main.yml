@@ -1,7 +1,7 @@
 ---
 
-- name: Only run on ansible_distribution Ubuntu
-  when: ansible_distribution|lower == "ubuntu"
+- name: Only run on ansible_facts.distributionUbuntu
+  when: ansible_facts.distribution|lower == "ubuntu"
   block:
     - name: Disable initial gnome setup
       ansible.builtin.lineinfile:
@@ -62,7 +62,7 @@
 
     - name: Disable gnome report in skel directory
       ansible.builtin.copy:
-        dest: "/etc/skel/.cache/ubuntu-report/ubuntu.{{ ansible_distribution_version }}"
+        dest: "/etc/skel/.cache/ubuntu-report/ubuntu.{{ ansible_facts.distribution_version }}"
         content: '{"OptOut": true}'
         force: false
         owner: root
